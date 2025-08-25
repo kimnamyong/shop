@@ -17,35 +17,38 @@ function App() {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
-            <img src="https://codingapple1.github.io/shop/shoes1.jpg"
-              width="100%"   />
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].content} & {shoes[0].price}원</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes2.jpg"
-              width="100%"
-            />
-           <h4>{shoes[1].title}</h4>
-            <p>{shoes[1].content} & {shoes[1].price}원</p>
-          </div>
-
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes3.jpg"
-              width="100%"
-            />
-           <h4>{shoes[2].title}</h4>
-            <p>{shoes[2].content} & {shoes[2].price}원</p>
-          </div>
+          {
+            shoes.map((a, i) => {
+              return <Card shoes={shoes[i]} i={i} />
+            })
+          }
         </div>
       </div>
     </div>
   );
 }
-
-
-
 export default App;
+
+// function Card(props) {
+//   return (
+//     <div className="col-md-4">
+//       <img
+//         src={"shoes" + (props.i + 1) + ".jpg"} width="100%"
+//       />
+//       <h4>{props.shoes.title}</h4>
+//       <p>{props.shoes.content} & {props.shoes.price}</p>
+//     </div>
+//   )
+// }
+
+function Card({shoes,i}) {
+  return (
+    <div className="col-md-4">
+      <img
+        src={"shoes" + (i + 1) + ".jpg"} width="100%"
+      />
+      <h4>{shoes.title}</h4>
+      <p>{shoes.content} & {shoes.price}</p>
+    </div>
+  )
+}
