@@ -12,7 +12,7 @@ function App() {
       <Container className="background">
         <h1>20% Season Off</h1>
         <p>  This is a modified jumbotron that occupies the entire horizontal space
-          of its parent.      </p>
+          of its parent. (^_^)     </p>
       </Container>
 
       <div className="container">
