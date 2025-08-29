@@ -1,54 +1,41 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./components/NavBar";
-import { Container } from "react-bootstrap";
 import Data from './components/data';
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Details from "./components/Details";
+import React, { useContext } from "react";
+export const 재고Context = React.createContext();
+
 function App() {
   let [shoes, shoes변경] = useState(Data);
+  let [재고, 재고변경] = useState([10, 11, 12]);
+
   return (
     <div className="App">
       <NavBar />
-      <Container className="background">
-        <h1>20% Season Off</h1>
-        <p>  This is a modified jumbotron that occupies the entire horizontal space
-          of its parent. (^_^)     </p>
-      </Container>
-
-      <div className="container">
-        <div className="row">
-          {
-            shoes.map((a, i) => {
-              return <Card shoes={shoes[i]} i={i} />
-            })
-          }
-        </div>
-      </div>
+      <Routes>
+        <Route path="/"
+          element={
+            <재고Context.Provider value={재고}>
+              <Home shoes={shoes} shoes변경={shoes변경} />
+            </재고Context.Provider>
+          }>
+        </Route>
+        <Route path="/detail/:id"
+          element={
+            <재고Context.Provider value={재고}>
+              <Details shoes={shoes} />
+            </재고Context.Provider>
+          }>
+        </Route>
+      </Routes>
     </div>
   );
 }
 export default App;
 
-// function Card(props) {
-//   return (
-//     <div className="col-md-4">
-//       <img
-//         src={"shoes" + (props.i + 1) + ".jpg"} width="100%"
-//       />
-//       <h4>{props.shoes.title}</h4>
-//       <p>{props.shoes.content} & {props.shoes.price}</p>
-//     </div>
-//   )
-// }
 
-function Card({shoes,i}) {
-  return (
-    <div className="col-md-4">
-      <img
-        src={"shoes" + (i + 1) + ".jpg"} width="100%"
-      />
-      <h4>{shoes.title}</h4>
-      <p>{shoes.content} & {shoes.price}</p>
-    </div>
-  )
-}
+
